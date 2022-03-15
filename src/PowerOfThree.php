@@ -32,4 +32,4 @@ test(4); // false
 test(9); // true
 test(27); // true
 test(81); // true
-test(PHP_INT_MAX); // ?
+test(PHP_INT_MAX); // false
