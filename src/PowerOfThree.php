@@ -12,7 +12,9 @@ function isPowerOfThree(int $num): bool
     $i = 0;
     do {
         $result = 3 ** $i++;
-        if ($result === $num) return true;
+        if ($result === $num) {
+            return true;
+        }
     } while ($result < $num);
     return false;
 }
