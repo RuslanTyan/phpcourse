@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace PhpCourse\Brackets;
 
-function isBalanced (string $str): ?bool
+function isBalanced(string $str): ?bool
 {
     $strLength = strlen($str);
     $depth = 0;
@@ -26,6 +26,7 @@ function isBalanced (string $str): ?bool
 }
 
 //Tests
+var_dump(isBalanced('a')); // null
 var_dump(isBalanced('')); // true
 var_dump(isBalanced('(())'));  // true
 var_dump(isBalanced('((())')); // false
