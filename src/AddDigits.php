@@ -15,11 +15,11 @@ function addDigits(int $num): ?int
         return $num;
     }
     // If argument is > 10 its digits should be summarized
-    $string = (string) $num; // can be $stringLength = strlen($string = (string) $num);
+    $string = (string)$num; // can be $stringLength = strlen($string = (string) $num);
     $result = 0;
     $stringLength = strlen($string);
     for ($i = 0; $i < $stringLength; $i++) {
-        $result += (int) $string[$i];
+        $result += (int)$string[$i];
     }
     return addDigits($result);
 }
