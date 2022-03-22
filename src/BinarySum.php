@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace PhpCourse\Solution;
+namespace PhpCourse\BinarySum;
 
-require_once 'OldSolution.php';
+require_once 'BinarySumViaInt.php';
 
 function binarySum(string $num1, string $num2): ?string
 {
@@ -70,6 +70,6 @@ myPrint(binarySum('11','11'));                                                  
 myPrint(binarySum(decbin(PHP_INT_MAX),decbin(PHP_INT_MAX)));                                             // 1111111111111111111111111111111111111111111111111111111111111110
 //myPrint(binarySum('PHP_INT_MAX',decbin(PHP_INT_MAX)));                                                  // null
 
-if (\PhpCourse\OldSolution\binarySum('1111111', '1111111') === binarySum('1111111', '1111111')) {
+if (\PhpCourse\BinarySumViaInt\binarySum('1111111', '1111111') === binarySum('1111111', '1111111')) {
     echo "Good, good!";
 } // Good, good!

@@ -1,27 +1,28 @@
 <?php
 declare(strict_types=1);
 
-namespace PhpCourse\OldSolution;
+namespace PhpCourse\BinarySumViaInt;
 
-function binarySum(string $num1, string $num2): string
+function binarySum(string $num1, string $num2): ?string
 {
     // Check only allowed symbols '0' or '1' are passed to variables
     if (!isBynaryString($num1) || !isBynaryString($num2)) {
         print_r("Error: Variables \$num1: '{$num1}' and \$num2:"
             . "'{$num2}' must contains only '0' and '1' symbols.\n");
-        return 'Error: non binary arguments';
+        return null;
     }
 
     // Check arguments are less than can be safely converted to integer abs($arg) <= PHP_INT_MAX
-    // TBD: Rewrite to ifs - see bad tests 1
-    if (isMaxSizeExceeded($num1)) {
+    $isNum1SizeExceeded = isMaxSizeExceeded($num1);
+    $isNum2SizeExceeded = isMaxSizeExceeded($num2);
+    if ($isNum1SizeExceeded) {
         print_r("Error: Variable \$num1:'{$num1}' is greater than max allowed by system\n");
     }
-    if (isMaxSizeExceeded($num2)) {
+    if ($isNum2SizeExceeded) {
         print_r("Error: Variable \$num2:'{$num2}' is greater than max allowed by system\n");
     }
-    if (isMaxSizeExceeded($num1) || isMaxSizeExceeded($num2)) {
-        return 'Error: Too big arguments';
+    if ($isNum1SizeExceeded || $isNum2SizeExceeded) {
+        return null;
     }
     // Convert to integers before summ
     $num1dec = strictBinDec($num1);
@@ -34,7 +35,7 @@ function binarySum(string $num1, string $num2): string
     }
     print_r("Summ of the arguments is greater than maximum allowed integer in the system."
         . "Summ:\n{$resultDec}\n");
-    return "Error: Summ is too big number";
+    return null;
 }
 
 function isBynaryString(string $str): bool
