@@ -30,7 +30,8 @@ function testAddDigits(array $arguments): void
             echo "addDigits({$key}) = {$value}", PHP_EOL;
             continue;
         }
-        throw new AssertionError("Incorrect value of addDigits({$key}) = {$addDigitsValue}, expected {$value}" . PHP_EOL);
+        throw new AssertionError("Incorrect value of"
+            . " addDigits({$key}) = {$addDigitsValue}, expected {$value}" . PHP_EOL);
     }
 }
 
@@ -48,7 +49,8 @@ function testBrackets(array $arguments): void
             echo "isBalanced({$key}) = {$value}", PHP_EOL;
             continue;
         }
-        throw new AssertionError("Incorrect value of isBalanced('{$key}') = {$result}, expected {$value}" . PHP_EOL);
+        throw new AssertionError("Incorrect value of"
+            . " isBalanced('{$key}') = {$result}, expected {$value}" . PHP_EOL);
     }
 }
 
@@ -71,6 +73,7 @@ function testFibonacci(array $arguments): void
 }
 
 // Tests addDigits
+echo "Test AddDigits class", PHP_EOL;
 $arguments = [
     -1 => -1,
     0 => 0,
@@ -87,6 +90,7 @@ try {
 }
 
 // FizzBuzz Tests
+echo PHP_EOL, PHP_EOL, "Test FizzBuzz class", PHP_EOL;
 $fbz = new FizzBuzz();
 $fbz->fizzBuzz(11, 20);
 echo PHP_EOL;
@@ -97,6 +101,7 @@ echo PHP_EOL;
 $fbz->fizzBuzz(20, 1);
 
 // Tests isBalanced
+echo PHP_EOL, PHP_EOL, "Test Brackets class", PHP_EOL;
 $arguments = [
     'a' => 'false',
     '' => 'true',
@@ -114,6 +119,7 @@ try {
 }
 
 // Tests Fibonacci
+echo PHP_EOL, PHP_EOL, "Test Fibonacci class", PHP_EOL;
 $arguments = [
     -1 => -1,
     0 => 0,
