@@ -6,11 +6,13 @@ namespace PhpCourse;
 require_once 'Tasks/Brackets.php';
 require_once 'Tasks/FizzBuzz.php';
 require_once 'Tasks/AddDigits.php';
+require_once 'Tasks/Fibonacci.php';
 
 use AssertionError;
 use InvalidArgumentException;
 use PhpCourse\Tasks\AddDigits;
 use PhpCourse\Tasks\Brackets;
+use PhpCourse\Tasks\Fibonacci;
 use PhpCourse\Tasks\FizzBuzz;
 use Throwable;
 
@@ -47,6 +49,24 @@ function testBrackets(array $arguments): void
             continue;
         }
         throw new AssertionError("Incorrect value of isBalanced('{$key}') = {$result}, expected {$value}" . PHP_EOL);
+    }
+}
+
+function testFibonacci(array $arguments): void
+{
+    foreach ($arguments as $key => $value) {
+        try {
+            $result = Fibonacci::fib($key);
+        } catch (InvalidArgumentException $exception) {
+            echo $exception->getMessage(), PHP_EOL;
+            continue;
+        }
+        if ($result === $value) {
+            echo "fib({$key}) = {$value}", PHP_EOL;
+            continue;
+        }
+        throw new AssertionError("Incorrect value of"
+            . " fib({$key}) = {$result}, expected {$value}" . PHP_EOL);
     }
 }
 
@@ -89,6 +109,23 @@ $arguments = [
 ];
 try {
     testBrackets($arguments);
+} catch (Throwable $exception) {
+    echo $exception->getMessage();
+}
+
+// Tests Fibonacci
+$arguments = [
+    -1 => -1,
+    0 => 0,
+    1 => 1,
+    3 => 2,
+    5 => 5,
+    10 => 55,
+    60 => 1548008755920,
+    30 => 55, // incorrect value
+];
+try {
+    testFibonacci($arguments);
 } catch (Throwable $exception) {
     echo $exception->getMessage();
 }
