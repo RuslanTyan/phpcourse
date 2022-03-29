@@ -3,12 +3,14 @@ declare(strict_types=1);
 
 namespace PhpCourse;
 
+require_once 'Tasks/Brackets.php';
 require_once 'Tasks/FizzBuzz.php';
 require_once 'Tasks/AddDigits.php';
 
 use AssertionError;
 use InvalidArgumentException;
 use PhpCourse\Tasks\AddDigits;
+use PhpCourse\Tasks\Brackets;
 use PhpCourse\Tasks\FizzBuzz;
 use Throwable;
 
@@ -27,6 +29,24 @@ function testAddDigits(array $arguments): void
             continue;
         }
         throw new AssertionError("Incorrect value of addDigits({$key}) = {$addDigitsValue}, expected {$value}" . PHP_EOL);
+    }
+}
+
+function testBrackets(array $arguments): void
+{
+    $br = new Brackets();
+    foreach ($arguments as $key => $value) {
+        try {
+            $result = $br->isBalanced($key) ? 'true' : 'false';
+        } catch (InvalidArgumentException $exception) {
+            echo $exception->getMessage(), PHP_EOL;
+            continue;
+        }
+        if ($result === $value) {
+            echo "isBalanced({$key}) = {$value}", PHP_EOL;
+            continue;
+        }
+        throw new AssertionError("Incorrect value of isBalanced('{$key}') = {$result}, expected {$value}" . PHP_EOL);
     }
 }
 
@@ -55,3 +75,20 @@ echo PHP_EOL;
 $fbz->fizzBuzz(0, 0);
 echo PHP_EOL;
 $fbz->fizzBuzz(20, 1);
+
+// Tests isBalanced
+$arguments = [
+    'a' => 'false',
+    '' => 'true',
+    '(())' => 'true',
+    '((())' => 'false',
+    ')(' => 'false',
+    '())(' => 'false',
+    '(()(())((()))(((()))))' => 'true',
+    '(()(())((()))(((())))))' => 'true', // incorrect value
+];
+try {
+    testBrackets($arguments);
+} catch (Throwable $exception) {
+    echo $exception->getMessage();
+}
