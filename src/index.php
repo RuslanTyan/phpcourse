@@ -7,6 +7,7 @@ require_once 'Tasks/Brackets.php';
 require_once 'Tasks/FizzBuzz.php';
 require_once 'Tasks/AddDigits.php';
 require_once 'Tasks/Fibonacci.php';
+require_once 'Tasks/PerfectNumber.php';
 
 use AssertionError;
 use InvalidArgumentException;
@@ -14,6 +15,7 @@ use PhpCourse\Tasks\AddDigits;
 use PhpCourse\Tasks\Brackets;
 use PhpCourse\Tasks\Fibonacci;
 use PhpCourse\Tasks\FizzBuzz;
+use PhpCourse\Tasks\PerfectNumber;
 use Throwable;
 
 function testAddDigits(array $arguments): void
@@ -69,6 +71,20 @@ function testFibonacci(array $arguments): void
         }
         throw new AssertionError("Incorrect value of"
             . " fib({$key}) = {$result}, expected {$value}" . PHP_EOL);
+    }
+}
+
+function testPerfectNumbers(array $arguments): void
+{
+    $pr = new PerfectNumber;
+    foreach ($arguments as $key => $value) {
+        $result = $pr->isPerfect($key) ? 'true' : 'false';
+        if ($result === $value) {
+            echo "isPerfect({$key}) = {$value}", PHP_EOL;
+            continue;
+        }
+        throw new AssertionError("Incorrect value of"
+            . " isPerfect('{$key}') = {$result}, expected {$value}" . PHP_EOL);
     }
 }
 
@@ -132,6 +148,27 @@ $arguments = [
 ];
 try {
     testFibonacci($arguments);
+} catch (Throwable $exception) {
+    echo $exception->getMessage();
+}
+
+// Tests PerfectNumbers
+echo PHP_EOL, PHP_EOL, "Test PerfectNumbers class", PHP_EOL;
+$arguments = [
+    -1 => 'false',
+    0 => 'false',
+    1 => 'false',
+    3 => 'false',
+    6 => 'true',
+    27 => 'false',
+    28 => 'true',
+    496 => 'true',
+    8128 => 'true',
+    33550336 => 'true',
+    33550337 => 'true' // incorrect value
+];
+try {
+    testPerfectNumbers($arguments);
 } catch (Throwable $exception) {
     echo $exception->getMessage();
 }
