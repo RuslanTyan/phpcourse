@@ -8,6 +8,7 @@ require_once 'Tasks/FizzBuzz.php';
 require_once 'Tasks/AddDigits.php';
 require_once 'Tasks/Fibonacci.php';
 require_once 'Tasks/PerfectNumber.php';
+require_once 'Tasks/PowerOfThree.php';
 
 use AssertionError;
 use InvalidArgumentException;
@@ -16,6 +17,7 @@ use PhpCourse\Tasks\Brackets;
 use PhpCourse\Tasks\Fibonacci;
 use PhpCourse\Tasks\FizzBuzz;
 use PhpCourse\Tasks\PerfectNumber;
+use PhpCourse\Tasks\PowerOfThree;
 use Throwable;
 
 function testAddDigits(array $arguments): void
@@ -85,6 +87,20 @@ function testPerfectNumbers(array $arguments): void
         }
         throw new AssertionError("Incorrect value of"
             . " isPerfect('{$key}') = {$result}, expected {$value}" . PHP_EOL);
+    }
+}
+
+function testPowerOfThree(array $arguments): void
+{
+    $power = new PowerOfThree;
+    foreach ($arguments as $key => $value) {
+        $result = $power->isPowerOfThree($key) ? 'true' : 'false';
+        if ($result === $value) {
+            echo "isPowerOfThree({$key}) = {$value}", PHP_EOL;
+            continue;
+        }
+        throw new AssertionError("Incorrect value of"
+            . " isPowerOfThree('{$key}') = {$result}, expected {$value}" . PHP_EOL);
     }
 }
 
@@ -169,6 +185,26 @@ $arguments = [
 ];
 try {
     testPerfectNumbers($arguments);
+} catch (Throwable $exception) {
+    echo $exception->getMessage();
+}
+
+// Tests testPowerOfThree
+echo PHP_EOL, PHP_EOL, "Test testPowerOfThree class", PHP_EOL;
+$arguments = [
+    -1 => 'false',
+    0 => 'false',
+    1 => 'true',
+    2 => 'false',
+    3 => 'true',
+    4 => 'false',
+    9 => 'true',
+    27 => 'true',
+    81 => 'true',
+    80 => 'true' // incorrect value
+];
+try {
+    testPowerOfThree($arguments);
 } catch (Throwable $exception) {
     echo $exception->getMessage();
 }
