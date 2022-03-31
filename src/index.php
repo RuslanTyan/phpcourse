@@ -10,10 +10,14 @@ require_once 'Tasks/Fibonacci.php';
 require_once 'Tasks/PerfectNumber.php';
 require_once 'Tasks/PowerOfThree.php';
 require_once 'Tasks/Ticket.php';
+require_once 'Tasks/BinarySum.php';
+require_once 'Tasks/BinarySumViaInt.php';
 
 use AssertionError;
 use InvalidArgumentException;
 use PhpCourse\Tasks\AddDigits;
+use PhpCourse\Tasks\BinarySum;
+use PhpCourse\Tasks\BinarySumViaInt;
 use PhpCourse\Tasks\Brackets;
 use PhpCourse\Tasks\Fibonacci;
 use PhpCourse\Tasks\FizzBuzz;
@@ -123,6 +127,26 @@ function testTicket(array $arguments): void
         throw new AssertionError("Incorrect value of"
             . " isHappy('{$key}') = {$result}, expected {$value}" . PHP_EOL);
     }
+}
+
+function testBinarySumms(object $bs, object $bsvi, array $arguments): void
+{
+    foreach ($arguments as $key => $value) {
+        try {
+            $binSum = $bs->binarySum((string)$key, $value);
+            $binSumViaInt = $bsvi->binarySum((string)$key, $value);
+        } catch (InvalidArgumentException $exception) {
+            echo $exception->getMessage();
+            continue;
+        }
+        if ($binSum === $binSumViaInt) {
+            echo "Binary sum of {$key} and {$value} is {$binSum}", PHP_EOL;
+            continue;
+        }
+        throw new AssertionError("Binary sum of {$key} and {$value}"
+            . " counted incorrectly: {$binSum} != {$binSumViaInt}" . PHP_EOL);
+    }
+
 }
 
 // Tests addDigits
@@ -242,6 +266,25 @@ $arguments = [
 ];
 try {
     testTicket($arguments);
+} catch (Throwable $exception) {
+    echo $exception->getMessage();
+}
+
+// Tests BinarySum & BinarySumViaInt
+echo PHP_EOL, PHP_EOL, "Test BinarySum & BinarySumViaInt classes", PHP_EOL;
+$bs = new BinarySum;
+$bsvi = new BinarySumViaInt;
+$arguments = [
+    '0' => '0',
+    '1' => '1',
+    '11' => '111',
+    '1231' => 'false',
+    '1010100001100101' => '110',
+    '1000111' => '1001',
+    '111111111111111111111111111111111111111111111111111111111111111' => '1'
+];
+try {
+    testBinarySumms($bs, $bsvi, $arguments);
 } catch (Throwable $exception) {
     echo $exception->getMessage();
 }
