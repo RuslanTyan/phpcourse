@@ -1,0 +1,20 @@
+{
+    "name": "rtyan/phpcourse",
+    "autoload": {
+        "psr-4": {
+            "PhpCourse\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ruslan Tyan",
+            "email": "tyan.ruslan@gmail.com"
+        }
+    ],
+    "require": {
+        "squizlabs/php_codesniffer": "*"
+    },
+    "scripts": {
+        "lint": "vendor/bin/phpcs --standard=PSR12 index.php src/"
+    }
+}

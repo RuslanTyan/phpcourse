@@ -1,20 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace PhpCourse;
+require __DIR__ . '/vendor/autoload.php';
 
-require_once 'Tasks/Brackets.php';
-require_once 'Tasks/FizzBuzz.php';
-require_once 'Tasks/AddDigits.php';
-require_once 'Tasks/Fibonacci.php';
-require_once 'Tasks/PerfectNumber.php';
-require_once 'Tasks/PowerOfThree.php';
-require_once 'Tasks/Ticket.php';
-require_once 'Tasks/BinarySum.php';
-require_once 'Tasks/BinarySumViaInt.php';
+/**
+ * use AssertionError;
+ * use InvalidArgumentException;
+ * use Throwable;
+ * PHP Warning:  The use statement with non-compound name 'AssertionError' has no effect in /Users/rtyan/github/phpcourse/index.php on line 15
+ * Warning: The use statement with non-compound name 'AssertionError' has no effect in /Users/rtyan/github/phpcourse/index.php on line 15
+ */
 
-use AssertionError;
-use InvalidArgumentException;
 use PhpCourse\Tasks\AddDigits;
 use PhpCourse\Tasks\BinarySum;
 use PhpCourse\Tasks\BinarySumViaInt;
@@ -24,7 +20,6 @@ use PhpCourse\Tasks\FizzBuzz;
 use PhpCourse\Tasks\PerfectNumber;
 use PhpCourse\Tasks\PowerOfThree;
 use PhpCourse\Tasks\Ticket;
-use Throwable;
 
 function testAddDigits(array $arguments): void
 {
