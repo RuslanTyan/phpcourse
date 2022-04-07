@@ -10,7 +10,8 @@ class Fibonacci
     public static function fib(int $index): int
     {
         if ($index < 0) {
-            throw new InvalidArgumentException("Error: function fib accepts only natural integer. \$index = $index was given");
+            throw new InvalidArgumentException("Error: function fib"
+                . " accepts only natural integer. \$index = $index was given");
         }
 
         static $fibCache = [
@@ -21,6 +22,6 @@ class Fibonacci
         if (array_key_exists($index, $fibCache)) {
             return $fibCache[$index];
         }
-        return $fibCache[$index] = Fibonacci::fib($index - 1) + Fibonacci::fib($index - 2);
+        return $fibCache[$index] = self::fib($index - 1) + self::fib($index - 2);
     }
 }

@@ -7,7 +7,7 @@ use InvalidArgumentException;
 
 class Ticket
 {
-    function isHappy(string $ticketNumber): bool
+    public function isHappy(string $ticketNumber): bool
     {
         if (preg_match('/\D/', $ticketNumber) !== 0) {
             throw new InvalidArgumentException("Your ticket number: {$ticketNumber}"

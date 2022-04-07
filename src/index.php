@@ -84,7 +84,7 @@ function testFibonacci(array $arguments): void
 
 function testPerfectNumbers(array $arguments): void
 {
-    $pr = new PerfectNumber;
+    $pr = new PerfectNumber();
     foreach ($arguments as $key => $value) {
         $result = $pr->isPerfect($key) ? 'true' : 'false';
         if ($result === $value) {
@@ -98,7 +98,7 @@ function testPerfectNumbers(array $arguments): void
 
 function testPowerOfThree(array $arguments): void
 {
-    $power = new PowerOfThree;
+    $power = new PowerOfThree();
     foreach ($arguments as $key => $value) {
         $result = $power->isPowerOfThree($key) ? 'true' : 'false';
         if ($result === $value) {
@@ -112,7 +112,7 @@ function testPowerOfThree(array $arguments): void
 
 function testTicket(array $arguments): void
 {
-    $ticket = new Ticket;
+    $ticket = new Ticket();
     foreach ($arguments as $key => $value) {
         try {
             $result = $ticket->isHappy((string)$key) ? 'true' : 'false';
@@ -272,8 +272,8 @@ try {
 
 // Tests BinarySum & BinarySumViaInt
 echo PHP_EOL, PHP_EOL, "Test BinarySum & BinarySumViaInt classes", PHP_EOL;
-$bs = new BinarySum;
-$bsvi = new BinarySumViaInt;
+$bs = new BinarySum();
+$bsvi = new BinarySumViaInt();
 $arguments = [
     '0' => '0',
     '1' => '1',

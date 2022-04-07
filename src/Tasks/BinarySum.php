@@ -9,7 +9,7 @@ class BinarySum
 {
     public function binarySum(string $num1, string $num2): string
     {
-        if (!$this->isBynaryString($num1) || !$this->isBynaryString($num2)) {
+        if (!$this->isBinaryString($num1) || !$this->isBinaryString($num2)) {
             throw new InvalidArgumentException("Error: Variables \$num1: '{$num1}' and \$num2:"
                 . "'{$num2}' must contains only '0' and '1' symbols.\n");
         }
@@ -52,7 +52,7 @@ class BinarySum
         return ($posFromTail < $strLen) ? $str[$strLen - 1 - $posFromTail] : '0';
     }
 
-    private function isBynaryString(string $str): bool
+    private function isBinaryString(string $str): bool
     {
         return str_replace(['0', '1'], '', $str) === '';
     }

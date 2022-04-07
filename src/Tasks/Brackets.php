@@ -24,7 +24,9 @@ class Brackets
                         . " '(' or ')' sybmols, but contains: $str[$i]");
             }
             // Immediately exit with false if closing bracket goes first or after balanced
-            if ($depth < 0) return false;
+            if ($depth < 0) {
+                return false;
+            }
         }
         return $depth === 0;
     }

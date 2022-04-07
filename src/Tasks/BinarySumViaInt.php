@@ -11,7 +11,7 @@ class BinarySumViaInt
     public function binarySum(string $num1, string $num2): string
     {
         // Check only allowed symbols '0' or '1' are passed to variables
-        if (!$this->isBynaryString($num1) || !$this->isBynaryString($num2)) {
+        if (!$this->isBinaryString($num1) || !$this->isBinaryString($num2)) {
             throw new InvalidArgumentException("Error: Variables \$num1: '{$num1}' and \$num2:"
                 . "'{$num2}' must contains only '0' and '1' symbols.\n");
         }
@@ -40,7 +40,7 @@ class BinarySumViaInt
             . "Summ:{$resultDec}\n");
     }
 
-    private function isBynaryString(string $str): bool
+    private function isBinaryString(string $str): bool
     {
         return str_replace(['0', '1'], '', $str) === '';
     }
@@ -59,7 +59,6 @@ class BinarySumViaInt
         }
         // Convert back from two's compliment numbers (~abs($i)+1)
         $substr = substr($binStr, 1);
-        $res = -(~bindec($substr) + 2 + PHP_INT_MAX);
-        return $res;
+        return -(~bindec($substr) + 2 + PHP_INT_MAX);
     }
 }
