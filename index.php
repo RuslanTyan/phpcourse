@@ -1,15 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 require __DIR__ . '/vendor/autoload.php';
-
-/**
- * use AssertionError;
- * use InvalidArgumentException;
- * use Throwable;
- * PHP Warning:  The use statement with non-compound name 'AssertionError' has no effect in /Users/rtyan/github/phpcourse/index.php on line 15
- * Warning: The use statement with non-compound name 'AssertionError' has no effect in /Users/rtyan/github/phpcourse/index.php on line 15
- */
 
 use PhpCourse\Tasks\AddDigits;
 use PhpCourse\Tasks\BinarySum;
@@ -141,7 +134,6 @@ function testBinarySumms(object $bs, object $bsvi, array $arguments): void
         throw new AssertionError("Binary sum of {$key} and {$value}"
             . " counted incorrectly: {$binSum} != {$binSumViaInt}" . PHP_EOL);
     }
-
 }
 
 // Tests addDigits

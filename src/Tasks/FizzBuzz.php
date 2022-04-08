@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PhpCourse\Tasks;
@@ -10,7 +11,7 @@ class FizzBuzz
         if ($end < $begin) {
             return;
         }
-        for ($i = $begin; ; $i++) {
+        for ($i = $begin;; $i++) {
             if ($this->isTripled($i)) {
                 echo "Fizz";
             }
