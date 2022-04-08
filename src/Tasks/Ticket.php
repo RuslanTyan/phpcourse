@@ -10,7 +10,7 @@ class Ticket
 {
     public function isHappy(string $ticketNumber): bool
     {
-        if (preg_match('/\D/', $ticketNumber) !== 0) {
+        if (preg_match('/\D/', $ticketNumber) !== 0 || $ticketNumber === '') {
             throw new InvalidArgumentException("Your ticket number: {$ticketNumber}"
                 . " contains not only digits and not happy.\n");
         }

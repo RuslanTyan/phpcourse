@@ -98,24 +98,6 @@ function testPowerOfThree(array $arguments): void
     }
 }
 
-function testTicket(array $arguments): void
-{
-    $ticket = new Ticket();
-    foreach ($arguments as $key => $value) {
-        try {
-            $result = $ticket->isHappy((string)$key) ? 'true' : 'false';
-        } catch (InvalidArgumentException $exception) {
-            echo $exception->getMessage(), PHP_EOL;
-            continue;
-        }
-        if ($result === $value) {
-            echo "isHappy({$key}) = {$value}", PHP_EOL;
-            continue;
-        }
-        throw new AssertionError("Incorrect value of"
-            . " isHappy('{$key}') = {$result}, expected {$value}" . PHP_EOL);
-    }
-}
 
 // Tests addDigits
 echo "Test AddDigits class", PHP_EOL;
@@ -223,20 +205,19 @@ try {
 }
 
 // Tests Ticket
-echo PHP_EOL, PHP_EOL, "Test Ticket class", PHP_EOL;
-$arguments = [
-    '385916' => 'true',
-    '231002' => 'false',
-    '1222' => 'false',
-    '054702' => 'true',
-    '00' => 'true',
-    '80' => 'true' // incorrect value
-];
-try {
-    testTicket($arguments);
-} catch (Throwable $exception) {
-    echo $exception->getMessage();
-}
+echo <<<HEREDOC
+    
+    Ticket class:
+    Method isHappy(string \$num1) returns true if the first part of number sum equal the last one
+    
+    HEREDOC;
+$doEatTicket = (new Ticket())->isHappy('11');
+echo <<<HEREDOC
+    
+    For example: (new Ticket())->isHappy('11') equals:{$doEatTicket}
+    
+    HEREDOC;
+
 
 // BinarySum
 echo <<<HEREDOC
