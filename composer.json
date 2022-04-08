@@ -2,7 +2,8 @@
     "name": "rtyan/phpcourse",
     "autoload": {
         "psr-4": {
-            "PhpCourse\\": "src/"
+            "PhpCourse\\": "src/",
+            "PhpCourseTests\\": "tests/"
         }
     },
     "authors": [

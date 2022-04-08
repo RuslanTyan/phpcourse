@@ -117,25 +117,6 @@ function testTicket(array $arguments): void
     }
 }
 
-function testBinarySumms(object $bs, object $bsvi, array $arguments): void
-{
-    foreach ($arguments as $key => $value) {
-        try {
-            $binSum = $bs->binarySum((string)$key, $value);
-            $binSumViaInt = $bsvi->binarySum((string)$key, $value);
-        } catch (InvalidArgumentException $exception) {
-            echo $exception->getMessage();
-            continue;
-        }
-        if ($binSum === $binSumViaInt) {
-            echo "Binary sum of {$key} and {$value} is {$binSum}", PHP_EOL;
-            continue;
-        }
-        throw new AssertionError("Binary sum of {$key} and {$value}"
-            . " counted incorrectly: {$binSum} != {$binSumViaInt}" . PHP_EOL);
-    }
-}
-
 // Tests addDigits
 echo "Test AddDigits class", PHP_EOL;
 $arguments = [
@@ -257,21 +238,35 @@ try {
     echo $exception->getMessage();
 }
 
-// Tests BinarySum & BinarySumViaInt
-echo PHP_EOL, PHP_EOL, "Test BinarySum & BinarySumViaInt classes", PHP_EOL;
-$bs = new BinarySum();
-$bsvi = new BinarySumViaInt();
-$arguments = [
-    '0' => '0',
-    '1' => '1',
-    '11' => '111',
-    '1231' => 'false',
-    '1010100001100101' => '110',
-    '1000111' => '1001',
-    '111111111111111111111111111111111111111111111111111111111111111' => '1'
-];
-try {
-    testBinarySumms($bs, $bsvi, $arguments);
-} catch (Throwable $exception) {
-    echo $exception->getMessage();
-}
+// BinarySum
+echo <<<HEREDOC
+    
+    BinarySum class:
+    Method binarySum(string \$num1, string \$num2) returns the result of binary sum 
+    of any binary numbers passed as strings. 
+    
+    HEREDOC;
+$bsResult = (new BinarySum())->binarySum('00010', '10000');
+echo <<<HEREDOC
+    
+    For example: (new BinarySum())->binarySum('00010', '10000') equals:{$bsResult}
+    
+    HEREDOC;
+
+// BinarySumViaInt
+echo <<<HEREDOC
+    
+    BinarySumViaInt class:
+    Method binarySum(string \$num1, string \$num2) returns the result of binary sum 
+    of any two's compliment numbers passed as strings. Can be used for manipulation with 
+    singed numbers binary representations. Method arguments and result are limited by 
+    (-PHP_INT_MAX, PHP_INT_MAX) range.
+    
+    HEREDOC;
+
+$bsResult = (new BinarySumViaInt())->binarySum('1', decbin(-PHP_INT_MAX));
+echo <<<HEREDOC
+    
+    For example: (new BinarySum())->binarySum('1', decbin(-PHP_INT_MAX)) equals:{$bsResult}
+    
+    HEREDOC;

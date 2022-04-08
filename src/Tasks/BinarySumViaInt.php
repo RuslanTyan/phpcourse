@@ -6,6 +6,7 @@ namespace PhpCourse\Tasks;
 
 use ArithmeticError;
 use InvalidArgumentException;
+use RangeException;
 
 class BinarySumViaInt
 {
@@ -18,13 +19,10 @@ class BinarySumViaInt
         }
 
         // Check arguments are less than can be safely converted to integer abs($arg) <= PHP_INT_MAX
-        if ($this->isMaxSizeExceeded($num1)) {
-            throw new InvalidArgumentException("Error: Variable \$num1:'{$num1}'"
-                . " is greater than max allowed by system\n");
-        }
-        if ($this->isMaxSizeExceeded($num2)) {
-            throw new InvalidArgumentException("Error: Variable \$num2:'{$num2}'"
-                . " is greater than max allowed by system\n");
+        if ($this->isMaxSizeExceeded($num1) || $this->isMaxSizeExceeded($num2)) {
+            $maxSystemBin = decbin(PHP_INT_MAX);
+            throw new RangeException("Error: Absolut values of arguments: \$num1: '{$num1}'" .
+                " and \$num2:'{$num2}' must not be greater than max allowed by system: $maxSystemBin\n");
         }
 
         // Convert to integers before summ
@@ -43,7 +41,7 @@ class BinarySumViaInt
 
     private function isBinaryString(string $str): bool
     {
-        return str_replace(['0', '1'], '', $str) === '';
+        return ($str !== '') && (str_replace(['0', '1'], '', $str) === '');
     }
 
     private function isMaxSizeExceeded(string $str): bool

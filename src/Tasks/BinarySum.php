@@ -44,7 +44,7 @@ class BinarySum
         if ($carry === 1) {
             $result = '1' . $result;
         }
-        return $result;
+        return $this->removeHeadingZeroes($result);
     }
 
     private function getReverseSymbol(string $str, int $posFromTail): string
@@ -55,6 +55,12 @@ class BinarySum
 
     private function isBinaryString(string $str): bool
     {
-        return str_replace(['0', '1'], '', $str) === '';
+        return ($str !== '') && (str_replace(['0', '1'], '', $str) === '');
+    }
+
+    private function removeHeadingZeroes(string $str): string
+    {
+        $pattern = '/^(0+)(.+)$/';
+        return preg_replace($pattern, '$2', $str);
     }
 }
