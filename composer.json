@@ -14,7 +14,11 @@
     "require": {
         "squizlabs/php_codesniffer": "*"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
     "scripts": {
-        "lint": "vendor/bin/phpcs --standard=PSR12 index.php src/"
+        "lint": "vendor/bin/phpcs --standard=PSR12 index.php src/ tests/",
+        "test": "phpunit"
     }
 }
