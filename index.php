@@ -60,19 +60,6 @@ function testPowerOfThree(array $arguments): void
     }
 }
 
-
-// FizzBuzz Tests
-echo PHP_EOL, PHP_EOL, "Test FizzBuzz class", PHP_EOL;
-$fbz = new FizzBuzz();
-$fbz->fizzBuzz(11, 20);
-echo PHP_EOL;
-$fbz->fizzBuzz(-10, 20);
-echo PHP_EOL;
-$fbz->fizzBuzz(0, 0);
-echo PHP_EOL;
-$fbz->fizzBuzz(20, 1);
-
-
 // Tests Fibonacci
 echo PHP_EOL, PHP_EOL, "Test Fibonacci class", PHP_EOL;
 $arguments = [
@@ -207,3 +194,17 @@ echo <<<HEREDOC
     For example: (new BinarySum())->binarySum('1', decbin(-PHP_INT_MAX)) equals:{$bsResult}
     
     HEREDOC;
+
+// FizzBuzz
+echo <<<HEREDOC
+    
+    FizzBuzz class:
+    Method fizzBuzz(int \$begin, int \$end) returns the values of numbers between \$begin and \$end
+    if it is not divided w/o remainder on 3 (in such case replaced by 'Fizz' string) or on 5 (in such
+    case replaced by 'Buzz' string). Work for any integers \$begin <= \$end
+    
+    For example: (new FizzBuzz())->fizzBuzz(10, 20) prints:
+    
+    HEREDOC;
+(new FizzBuzz())->fizzBuzz(10, 20);
+echo PHP_EOL;
