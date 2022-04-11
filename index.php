@@ -14,25 +14,6 @@ use PhpCourse\Tasks\PerfectNumber;
 use PhpCourse\Tasks\PowerOfThree;
 use PhpCourse\Tasks\Ticket;
 
-function testBrackets(array $arguments): void
-{
-    $br = new Brackets();
-    foreach ($arguments as $key => $value) {
-        try {
-            $result = $br->isBalanced($key) ? 'true' : 'false';
-        } catch (InvalidArgumentException $exception) {
-            echo $exception->getMessage(), PHP_EOL;
-            continue;
-        }
-        if ($result === $value) {
-            echo "isBalanced({$key}) = {$value}", PHP_EOL;
-            continue;
-        }
-        throw new AssertionError("Incorrect value of"
-            . " isBalanced('{$key}') = {$result}, expected {$value}" . PHP_EOL);
-    }
-}
-
 function testFibonacci(array $arguments): void
 {
     foreach ($arguments as $key => $value) {
@@ -91,23 +72,6 @@ $fbz->fizzBuzz(0, 0);
 echo PHP_EOL;
 $fbz->fizzBuzz(20, 1);
 
-// Tests isBalanced
-echo PHP_EOL, PHP_EOL, "Test Brackets class", PHP_EOL;
-$arguments = [
-    'a' => 'false',
-    '' => 'true',
-    '(())' => 'true',
-    '((())' => 'false',
-    ')(' => 'false',
-    '())(' => 'false',
-    '(()(())((()))(((()))))' => 'true',
-    '(()(())((()))(((())))))' => 'true', // incorrect value
-];
-try {
-    testBrackets($arguments);
-} catch (Throwable $exception) {
-    echo $exception->getMessage();
-}
 
 // Tests Fibonacci
 echo PHP_EOL, PHP_EOL, "Test Fibonacci class", PHP_EOL;
@@ -197,6 +161,19 @@ echo <<<HEREDOC
     
     HEREDOC;
 
+// Tests Brackets
+echo <<<HEREDOC
+    
+    Brackets class:
+    Method isBalanced(string \$str) returns true if the opening and closing brackets are balanced
+    
+    HEREDOC;
+$brackets = (new Brackets())->isBalanced('()');
+echo <<<HEREDOC
+    
+    For example: (new Brackets())->isBalanced('()') equals:{$brackets}
+    
+    HEREDOC;
 
 // BinarySum
 echo <<<HEREDOC
@@ -206,10 +183,10 @@ echo <<<HEREDOC
     of any binary numbers passed as strings. 
     
     HEREDOC;
-$bsResult = (new BinarySum())->binarySum('00010', '10000');
+$bsResult = (new BinarySum())->binarySum('000010', '10000');
 echo <<<HEREDOC
     
-    For example: (new BinarySum())->binarySum('00010', '10000') equals:{$bsResult}
+    For example: (new BinarySum())->binarySum('000010', '10000') equals:{$bsResult}
     
     HEREDOC;
 
