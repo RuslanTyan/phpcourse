@@ -32,20 +32,6 @@ function testFibonacci(array $arguments): void
     }
 }
 
-function testPowerOfThree(array $arguments): void
-{
-    $power = new PowerOfThree();
-    foreach ($arguments as $key => $value) {
-        $result = $power->isPowerOfThree($key) ? 'true' : 'false';
-        if ($result === $value) {
-            echo "isPowerOfThree({$key}) = {$value}", PHP_EOL;
-            continue;
-        }
-        throw new AssertionError("Incorrect value of"
-            . " isPowerOfThree('{$key}') = {$result}, expected {$value}" . PHP_EOL);
-    }
-}
-
 // Tests Fibonacci
 echo PHP_EOL, PHP_EOL, "Test Fibonacci class", PHP_EOL;
 $arguments = [
@@ -60,28 +46,6 @@ $arguments = [
 ];
 try {
     testFibonacci($arguments);
-} catch (Throwable $exception) {
-    echo $exception->getMessage();
-}
-
-
-
-// Tests testPowerOfThree
-echo PHP_EOL, PHP_EOL, "Test testPowerOfThree class", PHP_EOL;
-$arguments = [
-    -1 => 'false',
-    0 => 'false',
-    1 => 'true',
-    2 => 'false',
-    3 => 'true',
-    4 => 'false',
-    9 => 'true',
-    27 => 'true',
-    81 => 'true',
-    80 => 'true' // incorrect value
-];
-try {
-    testPowerOfThree($arguments);
 } catch (Throwable $exception) {
     echo $exception->getMessage();
 }
@@ -187,5 +151,19 @@ $isPerfect = (new PerfectNumber())->isPerfect(6) ? 'true' : 'false';
 echo <<<HEREDOC
     
     For example: (new PerfectNumber())->isPerfect(6) equals:{$isPerfect}
+    
+    HEREDOC;
+
+// PowerOfThree
+echo <<<HEREDOC
+    
+    PowerOfThree class:
+    Method isPowerOfThree(int \$num) returns true if the given number is power of 3
+    
+    HEREDOC;
+$isPowerOf3 = (new PowerOfThree())->isPowerOfThree(6) ? 'true' : 'false';
+echo <<<HEREDOC
+    
+    For example: (new PowerOfThree())->isPowerOfThree(6) equals:{$isPowerOf3}
     
     HEREDOC;
