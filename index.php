@@ -14,25 +14,6 @@ use PhpCourse\Tasks\PerfectNumber;
 use PhpCourse\Tasks\PowerOfThree;
 use PhpCourse\Tasks\Ticket;
 
-function testAddDigits(array $arguments): void
-{
-    $theDigit = new AddDigits();
-    foreach ($arguments as $key => $value) {
-        try {
-            $addDigitsValue = $theDigit->addDigits($key);
-        } catch (InvalidArgumentException $exception) {
-            echo $exception->getMessage(), PHP_EOL;
-            continue;
-        }
-        if ($addDigitsValue === $value) {
-            echo "addDigits({$key}) = {$value}", PHP_EOL;
-            continue;
-        }
-        throw new AssertionError("Incorrect value of"
-            . " addDigits({$key}) = {$addDigitsValue}, expected {$value}" . PHP_EOL);
-    }
-}
-
 function testBrackets(array $arguments): void
 {
     $br = new Brackets();
@@ -98,23 +79,6 @@ function testPowerOfThree(array $arguments): void
     }
 }
 
-
-// Tests addDigits
-echo "Test AddDigits class", PHP_EOL;
-$arguments = [
-    -1 => -1,
-    0 => 0,
-    1 => 1,
-    9 => 9,
-    10 => 1,
-    38 => 2,
-    37 => 2, // incorrect value
-];
-try {
-    testAddDigits($arguments);
-} catch (Throwable $exception) {
-    echo $exception->getMessage();
-}
 
 // FizzBuzz Tests
 echo PHP_EOL, PHP_EOL, "Test FizzBuzz class", PHP_EOL;
@@ -203,6 +167,21 @@ try {
 } catch (Throwable $exception) {
     echo $exception->getMessage();
 }
+
+// Tests AddDigits
+echo <<<HEREDOC
+    
+    AddDigits class:
+    Method addDigits(int \$num1) returns sum of all digits within the given number if sum is less than 10
+    or repeats the procedure recursively until its sum less than 10.
+    
+    HEREDOC;
+$theSum = (new AddDigits())->addDigits(333);
+echo <<<HEREDOC
+    
+    For example: (new AddDigits())->addDigits(333) equals:{$theSum}
+    
+    HEREDOC;
 
 // Tests Ticket
 echo <<<HEREDOC
