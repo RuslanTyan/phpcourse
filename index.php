@@ -32,20 +32,6 @@ function testFibonacci(array $arguments): void
     }
 }
 
-function testPerfectNumbers(array $arguments): void
-{
-    $pr = new PerfectNumber();
-    foreach ($arguments as $key => $value) {
-        $result = $pr->isPerfect($key) ? 'true' : 'false';
-        if ($result === $value) {
-            echo "isPerfect({$key}) = {$value}", PHP_EOL;
-            continue;
-        }
-        throw new AssertionError("Incorrect value of"
-            . " isPerfect('{$key}') = {$result}, expected {$value}" . PHP_EOL);
-    }
-}
-
 function testPowerOfThree(array $arguments): void
 {
     $power = new PowerOfThree();
@@ -78,26 +64,7 @@ try {
     echo $exception->getMessage();
 }
 
-// Tests PerfectNumbers
-echo PHP_EOL, PHP_EOL, "Test PerfectNumbers class", PHP_EOL;
-$arguments = [
-    -1 => 'false',
-    0 => 'false',
-    1 => 'false',
-    3 => 'false',
-    6 => 'true',
-    27 => 'false',
-    28 => 'true',
-    496 => 'true',
-    8128 => 'true',
-    33550336 => 'true',
-    33550337 => 'true' // incorrect value
-];
-try {
-    testPerfectNumbers($arguments);
-} catch (Throwable $exception) {
-    echo $exception->getMessage();
-}
+
 
 // Tests testPowerOfThree
 echo PHP_EOL, PHP_EOL, "Test testPowerOfThree class", PHP_EOL;
@@ -208,3 +175,17 @@ echo <<<HEREDOC
     HEREDOC;
 (new FizzBuzz())->fizzBuzz(10, 20);
 echo PHP_EOL;
+
+// PerfectNumber
+echo <<<HEREDOC
+    
+    PerfectNumber class:
+    Method isPerfect(int \$num) returns true given number is perfectt
+    
+    HEREDOC;
+$isPerfect = (new PerfectNumber())->isPerfect(6) ? 'true' : 'false';
+echo <<<HEREDOC
+    
+    For example: (new PerfectNumber())->isPerfect(6) equals:{$isPerfect}
+    
+    HEREDOC;
