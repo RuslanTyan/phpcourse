@@ -14,42 +14,6 @@ use PhpCourse\Tasks\PerfectNumber;
 use PhpCourse\Tasks\PowerOfThree;
 use PhpCourse\Tasks\Ticket;
 
-function testFibonacci(array $arguments): void
-{
-    foreach ($arguments as $key => $value) {
-        try {
-            $result = Fibonacci::fib($key);
-        } catch (InvalidArgumentException $exception) {
-            echo $exception->getMessage(), PHP_EOL;
-            continue;
-        }
-        if ($result === $value) {
-            echo "fib({$key}) = {$value}", PHP_EOL;
-            continue;
-        }
-        throw new AssertionError("Incorrect value of"
-            . " fib({$key}) = {$result}, expected {$value}" . PHP_EOL);
-    }
-}
-
-// Tests Fibonacci
-echo PHP_EOL, PHP_EOL, "Test Fibonacci class", PHP_EOL;
-$arguments = [
-    -1 => -1,
-    0 => 0,
-    1 => 1,
-    3 => 2,
-    5 => 5,
-    10 => 55,
-    60 => 1548008755920,
-    30 => 55, // incorrect value
-];
-try {
-    testFibonacci($arguments);
-} catch (Throwable $exception) {
-    echo $exception->getMessage();
-}
-
 // Tests AddDigits
 echo <<<HEREDOC
     
@@ -165,5 +129,20 @@ $isPowerOf3 = (new PowerOfThree())->isPowerOfThree(6) ? 'true' : 'false';
 echo <<<HEREDOC
     
     For example: (new PowerOfThree())->isPowerOfThree(6) equals:{$isPowerOf3}
+    
+    HEREDOC;
+
+// Fibonacci
+echo <<<HEREDOC
+    
+    Fibonacci class:
+    Static method fib(int \$index) returns result of Fibonacci function for the index if it less
+    than maximum integer in the system. Accepts \$index >= 0
+    
+    HEREDOC;
+$fib = Fibonacci::fib(11);
+echo <<<HEREDOC
+    
+    For example: Fibonacci::fib(11) equals:{$fib}
     
     HEREDOC;
