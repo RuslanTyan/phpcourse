@@ -15,7 +15,7 @@ class PowerOfThreeTest extends TestCase
     public function testIsPowerOfThree(int $num, bool $expected): void
     {
         $isPowerOf3 = (new PowerOfThree())->isPowerOfThree($num);
-        self::assertTrue($expected === $isPowerOf3, "Actual: $isPowerOf3");
+        self::assertEquals($expected, $isPowerOf3, "Actual: $isPowerOf3");
     }
 
     public function isPowerOfThreeProvider(): array

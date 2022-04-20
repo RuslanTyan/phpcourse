@@ -8,8 +8,6 @@ use InvalidArgumentException;
 use PhpCourse\Tasks\Brackets;
 use PHPUnit\Framework\TestCase;
 
-use function PHPUnit\Framework\assertTrue;
-
 class BracketsTest extends TestCase
 {
     /**
@@ -18,7 +16,7 @@ class BracketsTest extends TestCase
     public function testIsBalanced(string $str, bool $expected): void
     {
         $brackets = new Brackets();
-        assertTrue($brackets->isBalanced($str) === $expected);
+        self::assertEquals($expected, $brackets->isBalanced($str));
     }
 
     public function isBalancedProvider(): array

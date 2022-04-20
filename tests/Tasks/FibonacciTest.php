@@ -33,22 +33,13 @@ class FibonacciTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider fibInvalidInputProvider
-     */
-    public function testFibInvalidInput(int $index): void
+    public function testFibInvalidInput(): void
     {
+        $index = -1;
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Error: function fib"
             . " accepts only natural integer. \$index = $index was given");
         Fibonacci::fib($index);
-    }
-
-    public function fibInvalidInputProvider(): array
-    {
-        return [
-            [-1],
-        ];
     }
 
     /**

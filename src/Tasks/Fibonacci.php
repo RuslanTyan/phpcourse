@@ -20,7 +20,7 @@ class Fibonacci
             throw new InvalidArgumentException("Error: function fib"
                 . " accepts only natural integer. \$index = $index was given");
         }
-        if (array_key_exists($index, self::$fibCache)) {
+        if (isset(self::$fibCache[$index])) {
             return self::$fibCache[$index];
         }
         $res = self::fib($index - 1) + self::fib($index - 2);

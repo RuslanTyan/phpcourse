@@ -11,15 +11,15 @@ use PHPUnit\Framework\TestCase;
 class TicketTest extends TestCase
 {
     /**
-     * @dataProvider isHappyProvider
+     * @dataProvider isHappyProviderPositive
      */
-    public function testIsHappy(string $number): void
+    public function testIsHappyPositive(string $number): void
     {
         $ticket = new Ticket();
         self::assertTrue($ticket->isHappy($number));
     }
 
-    public function isHappyProvider(): array
+    public function isHappyProviderPositive(): array
     {
         return [
             ['385916'],

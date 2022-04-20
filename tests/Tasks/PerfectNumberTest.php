@@ -14,8 +14,7 @@ class PerfectNumberTest extends TestCase
      */
     public function testIsPerfect(int $num, $expected): void
     {
-        $isPerfectNumber = (new PerfectNumber())->isPerfect($num);
-        self::assertTrue($isPerfectNumber === $expected);
+        self::assertEquals($expected, (new PerfectNumber())->isPerfect($num));
     }
 
     public function isPerfectProvider(): array

@@ -51,7 +51,7 @@ class BinarySumViaIntTest extends TestCase
     public function binarySumOutOfRangeAgrumentsProvider(): array
     {
         return [
-            [decbin(PHP_INT_MAX) . '00','0'], //add double 0 because single 0 converts to negative binary only
+            [decbin(PHP_INT_MAX) . '00', '0'], //add double 0 because single 0 converts to negative binary only
             ['0', decbin(-PHP_INT_MAX) . '0'],
             [decbin(PHP_INT_MAX) . '00', decbin(-PHP_INT_MAX) . '0'],
         ];

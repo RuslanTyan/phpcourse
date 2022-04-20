@@ -27,7 +27,7 @@ class AddDigitsTests extends TestCase
             [9, 9],
             [10, 1],
             [38, 2],
-            [PHP_INT_MAX, 7]
+            [PHP_INT_MAX, 7],
         ];
     }
 

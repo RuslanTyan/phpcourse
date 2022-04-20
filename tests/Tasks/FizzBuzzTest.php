@@ -15,7 +15,7 @@ class FizzBuzzTest extends TestCase
     public function testFizzBuzz(int $begin, int $end, string $expected): void
     {
         $fizzBuzz = FizzBuzz::fizzBuzzAux($begin, $end);
-        self::assertTrue($expected === $fizzBuzz, "Actual:$fizzBuzz" . PHP_EOL);
+        self::assertEquals($expected, $fizzBuzz, "Actual:$fizzBuzz" . PHP_EOL);
     }
 
     public function fizzBuzzProvider(): array
