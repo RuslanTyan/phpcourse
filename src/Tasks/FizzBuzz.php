@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace PhpCourse\Tasks;
@@ -7,33 +8,29 @@ class FizzBuzz
 {
     public function fizzBuzz(int $begin, int $end): void
     {
-        if ($end < $begin) {
-            return;
-        }
-        for ($i = $begin; ; $i++) {
-            if ($this->isTripled($i)) {
-                echo "Fizz";
+        echo self::fizzBuzzAux($begin, $end);
+    }
+
+    public static function fizzBuzzAux(int $begin, int $end): string
+    {
+        $string = '';
+        for ($i = $begin; $i <= $end; $i++) {
+            $isTripled = $i % 3 === 0;
+            $isFifled = $i % 5 === 0;
+            if ($isTripled) {
+                $string .= "Fizz";
             }
-            if ($this->isFifled($i)) {
-                echo "Buzz";
+            if ($isFifled) {
+                $string .= "Buzz";
             }
-            if (!($this->isTripled($i) || $this->isFifled($i))) {
-                echo $i;
+            if (!($isTripled || $isFifled)) {
+                $string .= $i;
             }
-            if ($i >= $end) {
+            if ($i === $end) {
                 break;
             }
-            echo " ";
+            $string .= ' ';
         }
-    }
-
-    private function isTripled(int $num): bool
-    {
-        return $num % 3 === 0;
-    }
-
-    private function isFifled(int $num): bool
-    {
-        return $num % 5 === 0;
+        return $string;
     }
 }
