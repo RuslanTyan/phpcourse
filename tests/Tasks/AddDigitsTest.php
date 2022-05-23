@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use PhpCourse\Tasks\AddDigits;
 use PHPUnit\Framework\TestCase;
 
-class AddDigitsTests extends TestCase
+class AddDigitsTest extends TestCase
 {
     /**
      * @dataProvider addDigitsProvider
