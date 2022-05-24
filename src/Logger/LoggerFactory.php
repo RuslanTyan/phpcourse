@@ -6,7 +6,7 @@ namespace PhpCourse\Logger;
 
 class LoggerFactory
 {
-    private array $config;
+    protected array $config;
 
     public function __construct(array $config)
     {
