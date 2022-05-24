@@ -37,7 +37,7 @@ class App
         $theSum = (new AddDigits($this->logger))->addDigits(333);
         echo <<<HEREDOC
             
-            For example: (new AddDigits())->addDigits(333) equals:{$theSum}
+            For example: (new AddDigits(\$this->logger))->addDigits(333) equals:{$theSum}
             
             HEREDOC;
 
