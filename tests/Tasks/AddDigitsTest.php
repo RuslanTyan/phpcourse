@@ -45,7 +45,7 @@ class AddDigitsTest extends TestCase
         } catch (\Throwable $exception) {
             $this->assertInstanceOf(InvalidArgumentException::class, $exception);
             $this->assertEquals("Error: the argument {$num} is less than zero", $exception->getMessage());
-            $this->assertEquals("[ERR]Error: the argument {$num} is less than zero", $logger->getLastMessage());
+            $this->assertEquals("[ERR] Error: the argument {$num} is less than zero", $logger->getLastMessage());
         }
     }
 

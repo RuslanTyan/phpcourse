@@ -10,16 +10,16 @@ abstract class AbstractLogger implements LoggerInterface
 
     public function err(string $message): void
     {
-        $this->log('[ERR]' . $message);
+        $this->log('[ERR] ' . $message);
     }
 
     public function warn(string $message): void
     {
-        $this->log('[WARN]' . $message);
+        $this->log('[WARN] ' . $message);
     }
 
     public function info(string $message): void
     {
-        $this->log('[INFO]' . $message);
+        $this->log('[INFO] ' . $message);
     }
 }
