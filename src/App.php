@@ -78,10 +78,10 @@ class App
             of any binary numbers passed as strings. 
             
             HEREDOC;
-        $bsResult = (new BinarySum())->binarySum('000010', '10000');
+        $bsResult = (new BinarySum($this->logger))->binarySum('000010', '10000');
         echo <<<HEREDOC
             
-            For example: (new BinarySum())->binarySum('000010', '10000') equals:{$bsResult}
+            For example: (new BinarySum(\$this->logger))->binarySum('000010', '10000') equals:{$bsResult}
             
             HEREDOC;
 
