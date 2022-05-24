@@ -6,6 +6,10 @@ require __DIR__ . '/vendor/autoload.php';
 
 use PhpCourse\App;
 
-$myapp = new App();
+$config = require './config.php';
+$logger = (new PhpCourse\Logger\LoggerFactory($config))->getLogger();
 
+$myapp = new App($logger);
+$logger->info("Start app");
 $myapp->run();
+$logger->info("End app");

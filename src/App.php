@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpCourse;
 
+use PhpCourse\Logger\LoggerInterface;
 use PhpCourse\Tasks\AddDigits;
 use PhpCourse\Tasks\BinarySum;
 use PhpCourse\Tasks\BinarySumViaInt;
@@ -16,6 +17,13 @@ use PhpCourse\Tasks\Ticket;
 
 class App
 {
+    private LoggerInterface $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     public function run(): void
     {
         // Tests AddDigits
@@ -26,7 +34,7 @@ class App
             or repeats the procedure recursively until its sum less than 10.
             
             HEREDOC;
-        $theSum = (new AddDigits())->addDigits(333);
+        $theSum = (new AddDigits($this->logger))->addDigits(333);
         echo <<<HEREDOC
             
             For example: (new AddDigits())->addDigits(333) equals:{$theSum}

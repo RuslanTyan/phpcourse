@@ -5,13 +5,22 @@ declare(strict_types=1);
 namespace PhpCourse\Tasks;
 
 use InvalidArgumentException;
+use PhpCourse\Logger\LoggerInterface;
 
 class AddDigits
 {
+    private LoggerInterface $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     public function addDigits(int $num): int
     {
         // Check if argument is >= 0
         if ($num < 0) {
+            $this->logger->err("Error: the argument {$num} is less than zero");
             throw new InvalidArgumentException("Error: the argument {$num} is less than zero");
         }
         // If argument < 10 - it's one digit already and must be returned
