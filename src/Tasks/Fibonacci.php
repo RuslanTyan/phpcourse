@@ -39,12 +39,12 @@ class Fibonacci
         }
         $res = self::fib($index - 1) + self::fib($index - 2);
         if (is_int($res)) {
-            self::getLogger()->info("fib($index)=$res" . PHP_EOL);
+            self::getLogger()->info("fib($index)=$res");
             return self::$fibCache[$index] = $res;
         }
         // If the result not int - this means its value exceeded maximum integer
         self::getLogger()->warn("result of fib($index) = $res is greater than maximum integer "
-            . "allowed by the system:" . PHP_INT_MAX . PHP_EOL);
+            . "allowed by the system:" . PHP_INT_MAX);
         throw new ArithmeticError("result of fib($index) is greater than maximum integer "
                 . "allowed by the system:" . PHP_INT_MAX . PHP_EOL);
     }
