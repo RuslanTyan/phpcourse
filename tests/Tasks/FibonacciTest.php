@@ -6,17 +6,37 @@ namespace PhpCourseTests\Tasks;
 
 use ArithmeticError;
 use InvalidArgumentException;
+use PhpCourse\Logger\FakeLogger;
+use PhpCourse\Logger\LoggerInterface;
 use PhpCourse\Tasks\Fibonacci;
 use PHPUnit\Framework\TestCase;
 
 class FibonacciTest extends TestCase
 {
+    private function fibMock(): Fibonacci
+    {
+        return new class extends Fibonacci
+        {
+            protected static function getLogger(): LoggerInterface
+            {
+                return new FakeLogger();
+            }
+
+            public static function getLoggerLastMessage(): string
+            {
+                return self::getLogger()->getLastMessage();
+            }
+        };
+    }
+
+
     /**
      * @dataProvider fibProvider
      */
     public function testFib(int $index, int $expected): void
     {
-        $fib = Fibonacci::fib($index);
+        $fibMock = $this->fibMock();
+        $fib = $fibMock->fib($index);
         self::assertEquals($expected, $fib, "$expected no equal actual: $fib" . PHP_EOL);
     }
 
@@ -36,10 +56,17 @@ class FibonacciTest extends TestCase
     public function testFibInvalidInput(): void
     {
         $index = -1;
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage("Error: function fib"
-            . " accepts only natural integer. \$index = $index was given");
-        Fibonacci::fib($index);
+        $fibMock = $this->fibMock();
+        try {
+            $fibMock::fib($index);
+        } catch (\Throwable $exception) {
+            $this->assertInstanceOf(InvalidArgumentException::class, $exception);
+            $this->assertEquals("Error: function fib"
+                . " accepts only natural integer. \$index = $index was given", $exception->getMessage());
+            $this->assertEquals("Error: function fib"
+                . " accepts only natural integer. \$index = $index was given", $fibMock::getLoggerLastMessage());
+        }
+
     }
 
     /**

@@ -13,7 +13,7 @@ class Fibonacci
 {
     private static ?LoggerInterface $logger = null;
 
-    private static function getLogger(): LoggerInterface
+    protected static function getLogger(): LoggerInterface
     {
         if (self::$logger === null) {
             self::$logger = (new StaticLoggerFactory())->getLogger();
