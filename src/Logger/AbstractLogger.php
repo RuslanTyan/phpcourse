@@ -8,11 +8,11 @@ abstract class AbstractLogger implements LoggerInterface
 {
     abstract protected function log(string $message): void;
 
-    private const LEVEL_ERR = 0;
-    private const LEVEL_WARN = 1;
-    private const LEVEL_INFO = 2;
+    protected const LEVEL_ERR = 0;
+    protected const LEVEL_WARN = 1;
+    protected const LEVEL_INFO = 2;
 
-    private int $log_level = self::LEVEL_ERR;
+    protected int $log_level = self::LEVEL_ERR;
 
     public function setLogLevel(int $level): self
     {

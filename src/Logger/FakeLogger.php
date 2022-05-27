@@ -6,7 +6,9 @@ namespace PhpCourse\Logger;
 
 class FakeLogger extends AbstractLogger
 {
-    private string $lastMessage;
+    protected int $log_level = self::LEVEL_INFO;
+
+    protected string $lastMessage;
 
     protected function log(string $message): void
     {
