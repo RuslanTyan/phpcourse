@@ -5,12 +5,22 @@ declare(strict_types=1);
 namespace PhpCourse\Tasks;
 
 use InvalidArgumentException;
+use PhpCourse\Logger\LoggerInterface;
 
 class BinarySum
 {
+    private LoggerInterface $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     public function binarySum(string $num1, string $num2): string
     {
         if (!$this->isBinaryString($num1) || !$this->isBinaryString($num2)) {
+            $this->logger->err("Error: Variables \$num1: '{$num1}' and \$num2:"
+                . "'{$num2}' must contains only '0' and '1' symbols.\n");
             throw new InvalidArgumentException("Error: Variables \$num1: '{$num1}' and \$num2:"
                 . "'{$num2}' must contains only '0' and '1' symbols.\n");
         }
@@ -44,7 +54,9 @@ class BinarySum
         if ($carry === 1) {
             $result = '1' . $result;
         }
-        return $this->removeHeadingZeroes($result);
+        $result = $this->removeHeadingZeroes($result);
+        $this->logger->info("binarySum result: $result");
+        return $result;
     }
 
     private function getReverseSymbol(string $str, int $posFromTail): string

@@ -5,17 +5,19 @@ declare(strict_types=1);
 namespace PhpCourseTests\Tasks;
 
 use InvalidArgumentException;
+use PhpCourse\Logger\FakeLogger;
 use PhpCourse\Tasks\AddDigits;
 use PHPUnit\Framework\TestCase;
 
-class AddDigitsTests extends TestCase
+class AddDigitsTest extends TestCase
 {
     /**
      * @dataProvider addDigitsProvider
      */
     public function testAddDigits(int $num, int $expected): void
     {
-        $instance = new AddDigits();
+        $logger = new FakeLogger();
+        $instance = new AddDigits($logger);
         self::assertEquals($expected, $instance->addDigits($num));
     }
 
@@ -36,10 +38,15 @@ class AddDigitsTests extends TestCase
      */
     public function testAddDigitsInvalidInput(int $num): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage("Error: the argument {$num} is less than zero");
-        $instance = new AddDigits();
-        $instance->addDigits($num);
+        $logger = new FakeLogger();
+        $instance = new AddDigits($logger);
+        try {
+            $instance->addDigits($num);
+        } catch (\Throwable $exception) {
+            $this->assertInstanceOf(InvalidArgumentException::class, $exception);
+            $this->assertEquals("Error: the argument {$num} is less than zero", $exception->getMessage());
+            $this->assertEquals("[ERR] Error: the argument {$num} is less than zero", $logger->getLastMessage());
+        }
     }
 
     public function addDigitsInvalidInputProvider(): array

@@ -6,9 +6,21 @@ namespace PhpCourse\Tasks;
 
 use ArithmeticError;
 use InvalidArgumentException;
+use PhpCourse\Logger\LoggerInterface;
+use PhpCourse\Logger\StaticLoggerFactory;
 
 class Fibonacci
 {
+    private static ?LoggerInterface $logger = null;
+
+    protected static function getLogger(): LoggerInterface
+    {
+        if (self::$logger === null) {
+            self::$logger = (new StaticLoggerFactory())->getLogger();
+        }
+        return self::$logger;
+    }
+
     private static array $fibCache = [
         0 => 0,
         1 => 1,
@@ -17,6 +29,8 @@ class Fibonacci
     public static function fib(int $index): int
     {
         if ($index < 0) {
+            static::getLogger()->err("Error: function fib"
+                . " accepts only natural integer. \$index = $index was given");
             throw new InvalidArgumentException("Error: function fib"
                 . " accepts only natural integer. \$index = $index was given");
         }
@@ -25,10 +39,13 @@ class Fibonacci
         }
         $res = self::fib($index - 1) + self::fib($index - 2);
         if (is_int($res)) {
+            static::getLogger()->info("fib($index)=$res");
             return self::$fibCache[$index] = $res;
         }
         // If the result not int - this means its value exceeded maximum integer
+        static::getLogger()->warn("result of fib($index) = $res is greater than maximum integer "
+            . "allowed by the system:" . PHP_INT_MAX);
         throw new ArithmeticError("result of fib($index) is greater than maximum integer "
-                . "allowed by the system:" . PHP_INT_MAX . PHP_EOL);
+                . "allowed by the system:" . PHP_INT_MAX);
     }
 }
