@@ -8,11 +8,11 @@ abstract class AbstractLogger implements LoggerInterface
 {
     abstract protected function log(string $message): void;
 
-    private const LEVEL_INFO = 0;
+    private const LEVEL_ERR = 0;
     private const LEVEL_WARN = 1;
-    private const LEVEL_ERR = 2;
+    private const LEVEL_INFO = 2;
 
-    protected int $log_level = 0;
+    private int $log_level = self::LEVEL_ERR;
 
     public function setLogLevel(int $level): self
     {
@@ -22,25 +22,22 @@ abstract class AbstractLogger implements LoggerInterface
 
     public function err(string $message): void
     {
-        if ($this->log_level > self::LEVEL_ERR) {
-            return;
+        if ($this->log_level >= self::LEVEL_ERR) {
+            $this->log('[ERR] ' . $message);
         }
-        $this->log('[ERR] ' . $message);
     }
 
     public function warn(string $message): void
     {
-        if ($this->log_level > self::LEVEL_WARN) {
-            return;
+        if ($this->log_level >= self::LEVEL_WARN) {
+            $this->log('[WARN] ' . $message);
         }
-        $this->log('[WARN] ' . $message);
     }
 
     public function info(string $message): void
     {
-        if ($this->log_level > self::LEVEL_INFO) {
-            return;
+        if ($this->log_level >= self::LEVEL_INFO) {
+            $this->log('[INFO] ' . $message);
         }
-        $this->log('[INFO] ' . $message);
     }
 }
